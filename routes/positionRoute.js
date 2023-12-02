@@ -3,8 +3,9 @@ const { positionAddEdit,getPositions } = require("../controllers/PositionControl
 
 const router = express.Router();
 
-router.post("/position_add_edit", positionAddEdit);
-router.get("/position", getPositions);
+router.get("/", getPositions);
+router.post("/modify", positionAddEdit);
+
 
 
 module.exports = {

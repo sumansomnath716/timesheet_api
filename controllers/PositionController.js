@@ -33,24 +33,21 @@ const getPositions = async (req, res, next) => {
                                         const position = await firestore.collection('md_position');
                                         const data = await position.get();
                                         const posiiton_data = [];
-                                        if (data.empty) {
-                                                            res.status(404).send([]);
-                                        }
-                                        else {
-                                                            data.forEach(el => {
-                                                                                console.log(el.data())
-                                                                                const posObj = new Position(
-                                                                                                    el.id,
-                                                                                                    el.data().pos_name,
-                                                                                                    el.data().pos_dtls,
-                                                                                                    el.data().created_at,
-                                                                                                    el.data().created_by,
-                                                                                                    el.data().updated_at,
-                                                                                                    el.data().updated_by,
-                                                                                );
-                                                                                posiiton_data.push(posObj);
-                                                            })
-                                        }
+                                        if(!data.empty){
+                                        data.forEach(el => {
+                                                            console.log(el.data())
+                                                            const posObj = new Position(
+                                                                                el.id,
+                                                                                el.data().pos_name,
+                                                                                el.data().pos_dtls,
+                                                                                el.data().created_at,
+                                                                                el.data().created_by,
+                                                                                el.data().updated_at,
+                                                                                el.data().updated_by,
+                                                            );
+                                                            posiiton_data.push(posObj);
+                                        })
+                                      }
                                         res.send(posiiton_data);
                     }
                     catch (error) {
